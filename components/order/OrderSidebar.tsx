@@ -9,7 +9,7 @@ const getCategories = async () => {
 const OrderSidebar = async () => {
   // Fetch categories when the component mounts
   const categories = await getCategories();
-  console.log(categories);
+ 
   return (
     <aside className=" md:w-72 md:h-screen bg-white">
       <main className="mt-10">
