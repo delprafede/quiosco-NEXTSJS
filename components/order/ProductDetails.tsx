@@ -1,6 +1,8 @@
+import { useStore } from "@/src/lib/store";
 import { OrderItem } from "@/src/lib/types";
 import { formatCurrency } from "@/src/lib/utils";
 import { MinusIcon, PlusIcon, XCircleIcon } from "@heroicons/react/24/outline";
+
 
 type PedidoProps = {
   item: OrderItem;
@@ -8,6 +10,9 @@ type PedidoProps = {
 
 const ProductDetails = ({ item }: PedidoProps) => {
 
+  const increaseQuantity = useStore(state => state.increaseQuantity)
+  const decrementQuantity = useStore(state => state.decrementQuantity)
+  
   
   return <div className="shadow space-y-1 mb p-4 bg-white  border-t border-gray-200 ">
   <div className="space-y-4">
@@ -27,7 +32,9 @@ const ProductDetails = ({ item }: PedidoProps) => {
     <div className="flex gap-5 px-10 py-2 bg-gray-100 w-fit rounded-lg">
         <button
           type="button"
-          onClick={() => {}}
+          onClick={() => {
+            decrementQuantity(item.id)
+          }}
         >
             <MinusIcon className="h-6 w-6"/>
         </button>
@@ -38,9 +45,11 @@ const ProductDetails = ({ item }: PedidoProps) => {
 
         <button
            type="button"
-           onClick={() => {}}
+           onClick={() => {
+            increaseQuantity(item.id)
+           }}
         >
-            <PlusIcon className="h-6 w-6"/>
+            <PlusIcon className="h-6 w-6 cursor-pointer"/>
         </button>
     </div>
     <p className="text-xl font-black text-gray-700">
